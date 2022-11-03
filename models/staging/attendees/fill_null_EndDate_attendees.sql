@@ -1,0 +1,29 @@
+with fill_null_EndDate_attendees as
+
+(
+    select 
+    INDACCOUNTNUMBER,
+    INDFIRSTNAME,
+    INDMIDDLENAME,
+    INDLASTNAME,
+    INDACCOUNTSTATUS,
+    ATTENDANCE_IND_ALL_ALL_ALL_EVENTACCOUNT,
+    ATTENDANCE_IND_ALL_ALL_ALL_EVENTNAME,
+    ATTENDANCE_IND_ALL_ALL_ALL_OCCURRENCE,
+    ATTENDANCE_IND_ALL_ALL_ALL_STARTDATE,
+    ATTENDANCE_IND_ALL_ALL_ALL_STARTTIME,
+    ATTENDANCE_IND_ALL_ALL_ALL_ENDDATE,
+    ATTENDANCE_IND_ALL_ALL_ALL_ENDTIME,
+    ATTENDANCE_IND_ALL_ALL_ALL_EVENTCLASS,
+    ATTENDANCE_IND_ALL_ALL_ALL_WEBDESCRIPTION,
+    ATTENDANCE_IND_ALL_ALL_ALL_ATTENDANCETYPE,
+    StartDate,
+    coalesce(EndDate, StartDate) as EndDate,
+    StartDateLen,
+    StartDate_to_date
+
+    from {{ref('add_column_StartDate_to_date_attendees')}}
+)
+
+select * from fill_null_EndDate_attendees
+
