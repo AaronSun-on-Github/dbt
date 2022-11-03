@@ -1,0 +1,19 @@
+with raw_eccs as 
+(
+    select 
+    INDACCOUNTNUMBER,
+    INDFIRSTNAME,
+    INDMIDDLENAME,
+    INDLASTNAME,
+    INDACCOUNTSTATUS,
+    CNT_BOTH_ECC_CONTACTTYPE,
+    CNT_BOTH_ECC_ACCOUNTNUMBER,
+    CNT_BOTH_ECC_SORTFIELD,
+    CNT_BOTH_ECC_LASTNAME,
+    CNT_BOTH_ECC_FIRSTNAME,
+    CNT_BOTH_ECC_EFFECTIVEDATE,
+    CNT_BOTH_ECC_EXPIRYDATE
+    from {{source('src_ttt','raw_ttt')}}
+)
+
+select * from raw_eccs
