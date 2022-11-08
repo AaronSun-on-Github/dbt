@@ -1,8 +1,29 @@
-with filter_null_StartDate_agencySpeaker as 
+{% set column_names = get_individual_columns() + ',' + get_agencySpeakers_columns() %}
+
+with drop_duplicate_agencySpeaker as 
+(
+        {{dbt_utils.deduplicate(
+          relation=ref('raw_agencySpeaker'),
+          partition_by=column_names,
+          order_by= column_names
+          )
+        }}    
+),
+
+add_StartDate_EndDate_column_agencySpeaker as 
+(
+    select *, 
+    AFFIL_IND_AGENCYSPKR_EFFECTIVEDATE as StartDate,
+    AFFIL_IND_AGENCYSPKR_EXPIRYDATE as EndDate
+
+    from drop_duplicate_agencySpeaker
+),
+
+filter_null_StartDate_agencySpeaker as 
 (
     select * 
 
-    from {{ref('add_StartDate_EndDate_column_agencySpeaker')}}
+    from add_StartDate_EndDate_column_agencySpeaker
 
     where StartDate is not Null
 ),
