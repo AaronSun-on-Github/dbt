@@ -1,23 +1,10 @@
+{% set table_name = 'attendees' %}
+{% set column_names = get_individual_columns() + ',' + get_eventAttendees_columns() %}
+
 {{
     create_raw_element_table
     (
-        table_name = 'attendees',
-        column_names = '
-        INDACCOUNTNUMBER,
-        INDFIRSTNAME,
-        INDMIDDLENAME,
-        INDLASTNAME,
-        INDACCOUNTSTATUS,
-        ATTENDANCE_IND_ALL_ALL_ALL_EVENTACCOUNT,
-        ATTENDANCE_IND_ALL_ALL_ALL_EVENTNAME,
-        ATTENDANCE_IND_ALL_ALL_ALL_OCCURRENCE,
-        ATTENDANCE_IND_ALL_ALL_ALL_STARTDATE,
-        ATTENDANCE_IND_ALL_ALL_ALL_STARTTIME,
-        ATTENDANCE_IND_ALL_ALL_ALL_ENDDATE,
-        ATTENDANCE_IND_ALL_ALL_ALL_ENDTIME,
-        ATTENDANCE_IND_ALL_ALL_ALL_EVENTCLASS,
-        ATTENDANCE_IND_ALL_ALL_ALL_WEBDESCRIPTION,
-        ATTENDANCE_IND_ALL_ALL_ALL_ATTENDANCETYPE
-        '
+        table_name = table_name, 
+        column_names = column_names
     )
 }}

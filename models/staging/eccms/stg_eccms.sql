@@ -11,7 +11,6 @@ with drop_duplicate_eccms as
         }} 
 ),
 
-
 add_StartDate_EndDate_column_eccms as 
 (
     select *, 
